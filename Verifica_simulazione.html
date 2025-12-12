@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulazione Verifica: Limiti e Continuità</title>
+    <!-- Tailwind CSS per lo stile -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configurazione MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .solution-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .math-display {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Intestazione -->
+    <header class="bg-blue-700 text-white p-6 shadow-lg">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-3xl font-bold mb-2">Simulazione Verifica</h1>
+            <h2 class="text-xl opacity-90">Calcolo dei Limiti e Continuità</h2>
+            <p class="mt-4 text-sm opacity-80">Istruzioni: Svolgi gli esercizi su carta, poi clicca su "Mostra Soluzione" per verificare il risultato e capire i passaggi.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-4xl p-6 space-y-8">
+
+        <!-- Esercizio 1 -->
+        <section class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold text-blue-800">Esercizio 1: Calcolo dei Limiti</h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">20 punti</span>
+            </div>
+            <p class="mb-4">Calcola i seguenti limiti risolvendo le forme indeterminate:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 1a -->
+                <div class="bg-gray-50 p-4 rounded border">
+                    <p class="font-semibold mb-2">a.</p>
+                    <div class="math-display">
+                        $$ \lim_{x \to 3} \frac{x^3 - 27}{x^2 - x - 6} $$
+                    </div>
+                    <button onclick="toggleSolution('sol-1a')" class="mt-2 text-sm bg-white border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded transition">
+                        Mostra Soluzione
+                    </button>
+                    <div id="sol-1a" class="solution-content mt-4 text-sm border-t pt-4">
+                        <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                        <p>Sostituendo $x=3$ otteniamo la forma indeterminata $0/0$.</p>
+                        <p>Scomponiamo il numeratore (differenza di cubi) e il denominatore (trinomio notevole).</p>
+                        <p>Numeratore: $x^3 - 3^3 = (x-3)(x^2 + 3x + 9)$</p>
+                        <p>Denominatore: cerchiamo due numeri con somma $-1$ e prodotto $-6$. Sono $-3$ e $+2$.<br>
+                        $x^2 - x - 6 = (x-3)(x+2)$</p>
+                        <p>Il limite diventa:</p>
+                        $$ \lim_{x \to 3} \frac{(x-3)(x^2 + 3x + 9)}{(x-3)(x+2)} = \lim_{x \to 3} \frac{x^2 + 3x + 9}{x+2} $$
+                        <p>Sostituendo $x=3$: $\frac{9 + 9 + 9}{3 + 2} = \frac{27}{5}$</p>
+                    </div>
+                </div>
+
+                <!-- 1b -->
+                <div class="bg-gray-50 p-4 rounded border">
+                    <p class="font-semibold mb-2">b.</p>
+                    <div class="math-display">
+                        $$ \lim_{x \to +\infty} (\sqrt{x^2 + 4x} - x) $$
+                    </div>
+                    <button onclick="toggleSolution('sol-1b')" class="mt-2 text-sm bg-white border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded transition">
+                        Mostra Soluzione
+                    </button>
+                    <div id="sol-1b" class="solution-content mt-4 text-sm border-t pt-4">
+                        <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                        <p>Forma indeterminata $+\infty - \infty$. Razionalizziamo moltiplicando e dividendo per la somma:</p>
+                        $$ \lim_{x \to +\infty} \frac{(\sqrt{x^2 + 4x} - x)(\sqrt{x^2 + 4x} + x)}{\sqrt{x^2 + 4x} + x} $$
+                        <p>Al numeratore otteniamo una differenza di quadrati:</p>
+                        $$ \frac{(x^2 + 4x) - x^2}{\sqrt{x^2 + 4x} + x} = \frac{4x}{\sqrt{x^2(1 + \frac{4}{x})} + x} $$
+                        <p>Portiamo fuori $x$ dalla radice (essendo $x \to +\infty$, $|x|=x$):</p>
+                        $$ \lim_{x \to +\infty} \frac{4x}{x\sqrt{1 + \frac{4}{x}} + x} = \lim_{x \to +\infty} \frac{4x}{x(\sqrt{1 + \frac{4}{x}} + 1)} $$
+                        <p>Semplifichiamo la $x$. Poiché $4/x \to 0$, otteniamo:</p>
+                        $$ \frac{4}{\sqrt{1} + 1} = \frac{4}{2} = 2 $$
+                    </div>
+                </div>
+
+                <!-- 1c -->
+                <div class="bg-gray-50 p-4 rounded border">
+                    <p class="font-semibold mb-2">c.</p>
+                    <div class="math-display">
+                        $$ \lim_{x \to 0} \frac{1 - \cos(3x)}{2x^2} $$
+                    </div>
+                    <button onclick="toggleSolution('sol-1c')" class="mt-2 text-sm bg-white border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded transition">
+                        Mostra Soluzione
+                    </button>
+                    <div id="sol-1c" class="solution-content mt-4 text-sm border-t pt-4">
+                        <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                        <p>Forma indeterminata $0/0$. Utilizziamo il limite notevole $\lim_{t \to 0} \frac{1-\cos t}{t^2} = \frac{1}{2}$.</p>
+                        <p>Qui l'argomento è $3x$, quindi al denominatore dovremmo avere $(3x)^2 = 9x^2$.</p>
+                        <p>Moltiplichiamo e dividiamo per 9 e sistemiamo la costante 2:</p>
+                        $$ \lim_{x \to 0} \frac{1}{2} \cdot \frac{1 - \cos(3x)}{x^2} \cdot \frac{9}{9} $$
+                        $$ \frac{9}{2} \cdot \lim_{x \to 0} \frac{1 - \cos(3x)}{(3x)^2} $$
+                        <p>Il limite diventa:</p>
+                        $$ \frac{9}{2} \cdot \frac{1}{2} = \frac{9}{4} $$
+                    </div>
+                </div>
+
+                <!-- 1d -->
+                <div class="bg-gray-50 p-4 rounded border">
+                    <p class="font-semibold mb-2">d.</p>
+                    <div class="math-display">
+                        $$ \lim_{x \to +\infty} \frac{3x^3 - 5x + 1}{2x^3 + x^2} $$
+                    </div>
+                    <button onclick="toggleSolution('sol-1d')" class="mt-2 text-sm bg-white border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded transition">
+                        Mostra Soluzione
+                    </button>
+                    <div id="sol-1d" class="solution-content mt-4 text-sm border-t pt-4">
+                        <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                        <p>Forma indeterminata $\infty/\infty$. Poiché numeratore e denominatore sono polinomi dello stesso grado (3), il limite è il rapporto dei coefficienti di grado massimo.</p>
+                        <p>Procedimento formale (raccoglimento):</p>
+                        $$ \lim_{x \to +\infty} \frac{x^3(3 - \frac{5}{x^2} + \frac{1}{x^3})}{x^3(2 + \frac{1}{x})} $$
+                        <p>Semplificando $x^3$ e notando che le frazioni tendono a 0:</p>
+                        $$ \frac{3 - 0 + 0}{2 + 0} = \frac{3}{2} $$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Esercizio 2 -->
+        <section class="bg-white rounded-lg shadow-md p-6 border-l-4 border-indigo-500">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold text-indigo-800">Esercizio 2: Continuità con parametro</h3>
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">15 punti</span>
+            </div>
+            <p class="mb-4">Determina per quale valore di $k$ la seguente funzione è continua in tutto $\mathbb{R}$:</p>
+            <div class="math-display bg-gray-50 p-4 rounded border mb-4">
+                $$ f(x) = \begin{cases} \frac{\sin(4x)}{kx} & \text{se } x < 0 \\ 3x + k + 1 & \text{se } x \ge 0 \end{cases} $$
+            </div>
+            
+            <button onclick="toggleSolution('sol-2')" class="text-sm bg-white border border-indigo-500 text-indigo-500 hover:bg-indigo-50 px-4 py-2 rounded transition">
+                Mostra Soluzione
+            </button>
+            <div id="sol-2" class="solution-content mt-4 text-sm bg-indigo-50 p-4 rounded">
+                <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                <p>Le due sotto-funzioni sono continue nei loro intervalli. Il punto critico è $x=0$. Affinché $f(x)$ sia continua, il limite sinistro deve essere uguale al limite destro (che coincide con $f(0)$).</p>
+                
+                <p class="mt-2 font-semibold">1. Calcolo $f(0)$ e limite destro ($x \to 0^+$):</p>
+                $$ \lim_{x \to 0^+} (3x + k + 1) = 3(0) + k + 1 = k + 1 $$
+                
+                <p class="mt-2 font-semibold">2. Calcolo limite sinistro ($x \to 0^-$):</p>
+                $$ \lim_{x \to 0^-} \frac{\sin(4x)}{kx} $$
+                <p>Usiamo il limite notevole $\frac{\sin t}{t} \to 1$. Moltiplichiamo e dividiamo per 4:</p>
+                $$ \lim_{x \to 0^-} \frac{\sin(4x)}{4x} \cdot \frac{4}{k} = 1 \cdot \frac{4}{k} = \frac{4}{k} $$
+                
+                <p class="mt-2 font-semibold">3. Uguaglianza:</p>
+                $$ \frac{4}{k} = k + 1 $$
+                <p>Supponendo $k \ne 0$, risolviamo:</p>
+                $$ 4 = k(k+1) \Rightarrow k^2 + k - 4 = 0 $$
+                $$ k = \frac{-1 \pm \sqrt{1 - 4(1)(-4)}}{2} = \frac{-1 \pm \sqrt{17}}{2} $$
+                <p>I valori di $k$ sono $\frac{-1 - \sqrt{17}}{2}$ e $\frac{-1 + \sqrt{17}}{2}$.</p>
+            </div>
+        </section>
+
+        <!-- Esercizio 3 -->
+        <section class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold text-yellow-800">Esercizio 3: Punti di Singolarità</h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">20 punti</span>
+            </div>
+            <p class="mb-4">Individua e classifica i punti di singolarità (discontinuità) della funzione:</p>
+            <div class="math-display text-center mb-4 text-lg">
+                $$ y = \frac{x^2 - 3x + 2}{x^2 - 4} $$
+            </div>
+            
+            <button onclick="toggleSolution('sol-3')" class="text-sm bg-white border border-yellow-600 text-yellow-600 hover:bg-yellow-50 px-4 py-2 rounded transition">
+                Mostra Soluzione
+            </button>
+            <div id="sol-3" class="solution-content mt-4 text-sm bg-yellow-50 p-4 rounded">
+                <p class="font-bold text-green-600 mb-2">Svolgimento:</p>
+                <p>Determiniamo il Dominio ponendo il denominatore diverso da zero:</p>
+                $$ x^2 - 4 \ne 0 \Rightarrow x \ne 2, x \ne -2 $$
+                <p>I punti da studiare sono $x = 2$ e $x = -2$.</p>
+
+                <p class="mt-2 font-semibold border-b border-yellow-200 pb-1">Punto $x = 2$</p>
+                <p>Sostituendo nel limite:</p>
+                $$ \lim_{x \to 2} \frac{x^2 - 3x + 2}{x^2 - 4} = \frac{4 - 6 + 2}{4 - 4} = \frac{0}{0} $$
+                <p>Scomponiamo: Num $(x-2)(x-1)$, Den $(x-2)(x+2)$.</p>
+                $$ \lim_{x \to 2} \frac{(x-2)(x-1)}{(x-2)(x+2)} = \lim_{x \to 2} \frac{x-1}{x+2} = \frac{1}{4} $$
+                <p>Poiché il limite è finito ($l \ne \infty$), ma la funzione non è definita, $x=2$ è una <strong>Singolarità Eliminabile (III Specie)</strong>.</p>
+
+                <p class="mt-4 font-semibold border-b border-yellow-200 pb-1">Punto $x = -2$</p>
+                <p>Utilizziamo la forma semplificata per il calcolo:</p>
+                $$ \lim_{x \to -2} \frac{x-1}{x+2} = \frac{-3}{0} = \infty $$
+                <p>Poiché il limite è infinito, $x=-2$ è una <strong>Discontinuità di II Specie</strong> (o asintoto verticale).</p>
+            </div>
+        </section>
+
+        <!-- Esercizio 4 -->
+        <section class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold text-purple-800">Esercizio 4: Grafici Probabili</h3>
+                <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">25 punti</span>
+            </div>
+            <p class="mb-4">Per ciascuna funzione, determina dominio, segno e asintoti per tracciarne il grafico probabile.</p>
+            
+            <div class="grid grid-cols-1 gap-8">
+                <!-- 4a -->
+                <div class="border-b pb-6">
+                    <p class="font-semibold text-lg mb-2">a. <span class="font-normal text-base ml-2">$$ y = \ln\left(\frac{x+1}{x}\right) $$</span></p>
+                    <button onclick="toggleSolution('sol-4a')" class="text-sm bg-white border border-purple-500 text-purple-500 hover:bg-purple-50 px-4 py-2 rounded transition">
+                        Analisi Completa
+                    </button>
+                    <div id="sol-4a" class="solution-content mt-4 text-sm bg-purple-50 p-4 rounded">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Dominio:</strong> Argomento $>0$. $\frac{x+1}{x} > 0$.<br>
+                            Num $>0 \Rightarrow x > -1$. Den $>0 \Rightarrow x > 0$.<br>
+                            Concordanza segni: $x < -1 \cup x > 0$.</li>
+                            
+                            <li><strong>Segno:</strong> $\ln(\dots) > 0 \Rightarrow \text{argomento} > 1$.<br>
+                            $\frac{x+1}{x} > 1 \Rightarrow \frac{x+1-x}{x} > 0 \Rightarrow \frac{1}{x} > 0 \Rightarrow x > 0$.<br>
+                            La funzione è positiva per $x>0$ e negativa per $x<-1$.</li>
+
+                            <li><strong>Asintoti:</strong>
+                                <ul class="list-circle pl-5 mt-1">
+                                    <li>$\lim_{x \to 0^+} \ln(\frac{1}{0^+}) = \ln(+\infty) = +\infty \Rightarrow x=0$ Asintoto Verticale.</li>
+                                    <li>$\lim_{x \to -1^-} \ln(\frac{0^-}{-1}) = \ln(0^+) = -\infty \Rightarrow x=-1$ Asintoto Verticale.</li>
+                                    <li>$\lim_{x \to \pm\infty} \ln(\frac{x}{x}) = \ln(1) = 0 \Rightarrow y=0$ Asintoto Orizzontale.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4b -->
+                <div>
+                    <p class="font-semibold text-lg mb-2">b. <span class="font-normal text-base ml-2">$$ y = \frac{x^2 - 4}{x - 1} $$</span></p>
+                    <button onclick="toggleSolution('sol-4b')" class="text-sm bg-white border border-purple-500 text-purple-500 hover:bg-purple-50 px-4 py-2 rounded transition">
+                        Analisi Completa
+                    </button>
+                    <div id="sol-4b" class="solution-content mt-4 text-sm bg-purple-50 p-4 rounded">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Dominio:</strong> $x \ne 1$.</li>
+                            
+                            <li><strong>Intersezioni assi:</strong> 
+                                <br>Asse $y$: $x=0 \Rightarrow y=4$.
+                                <br>Asse $x$: $y=0 \Rightarrow x^2-4=0 \Rightarrow x=\pm 2$.</li>
+
+                            <li><strong>Segno:</strong>
+                                <br>Num $x^2-4 > 0 \Rightarrow x < -2 \cup x > 2$.
+                                <br>Den $x-1 > 0 \Rightarrow x > 1$.
+                                <br>Tabella segni: Negativo tra $(-\infty, -2)$ e $(1, 2)$. Positivo altrove.</li>
+
+                            <li><strong>Asintoti:</strong>
+                                <ul class="list-circle pl-5 mt-1">
+                                    <li>Verticale: $\lim_{x \to 1} f(x) = \infty \Rightarrow x=1$.</li>
+                                    <li>Obliquo: Grado Num = Grado Den + 1. C'è asintoto obliquo.
+                                    <br>Eseguendo la divisione polinomiale $(x^2-4) : (x-1)$ otteniamo $x+1$ con resto $-3$.
+                                    <br>Equazione asintoto: $y = x + 1$.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-8">
+        <p class="text-sm opacity-75">Simulazione generata con AI - Basata sui modelli del testo Zanichelli</p>
+    </footer>
+
+    <script>
+        function toggleSolution(id) {
+            var element = document.getElementById(id);
+            var btn = element.previousElementSibling; // Il bottone
+            if (element.style.display === "block") {
+                element.style.display = "none";
+                btn.textContent = "Mostra Soluzione";
+            } else {
+                element.style.display = "block";
+                btn.textContent = "Nascondi Soluzione";
+            }
+        }
+    </script>
+</body>
+</html>
